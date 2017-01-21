@@ -1,9 +1,9 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oculus-haunted-house.Plugins", "oculus-haunted-house.Plugins.csproj", "{99496C4C-56BC-106A-9483-F71D7C4BF024}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{007A5E62-4F8A-8CAE-336A-FCBE688486E3}") = "oculus-haunted-house", "Assembly-CSharp-firstpass.csproj", "{374321F8-17EC-7C79-8FFA-38DD64F91342}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oculus-haunted-house.Editor.Plugins", "oculus-haunted-house.Editor.Plugins.csproj", "{507D7147-0A3C-86D7-1B7A-50956FCF6D11}"
+Project("{007A5E62-4F8A-8CAE-336A-FCBE688486E3}") = "oculus-haunted-house", "Assembly-CSharp-Editor-firstpass.csproj", "{D8BE50B8-6275-6673-959F-5A8261BAE01E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,16 +11,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{99496C4C-56BC-106A-9483-F71D7C4BF024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99496C4C-56BC-106A-9483-F71D7C4BF024}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99496C4C-56BC-106A-9483-F71D7C4BF024}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99496C4C-56BC-106A-9483-F71D7C4BF024}.Release|Any CPU.Build.0 = Release|Any CPU
-		{507D7147-0A3C-86D7-1B7A-50956FCF6D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{507D7147-0A3C-86D7-1B7A-50956FCF6D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{507D7147-0A3C-86D7-1B7A-50956FCF6D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{507D7147-0A3C-86D7-1B7A-50956FCF6D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{374321F8-17EC-7C79-8FFA-38DD64F91342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{374321F8-17EC-7C79-8FFA-38DD64F91342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{374321F8-17EC-7C79-8FFA-38DD64F91342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{374321F8-17EC-7C79-8FFA-38DD64F91342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8BE50B8-6275-6673-959F-5A8261BAE01E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8BE50B8-6275-6673-959F-5A8261BAE01E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8BE50B8-6275-6673-959F-5A8261BAE01E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8BE50B8-6275-6673-959F-5A8261BAE01E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal
