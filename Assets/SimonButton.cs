@@ -18,7 +18,15 @@ public class SimonButton : MonoBehaviour {
 		}
 	}
 
-	void Press(bool rightButton) {
+	public void Press(bool rightButton) {
 		// play noise and effect
+		if (!rightButton)
+		{
+			Debug.Log("WRONG!");
+		}
+		else
+		{
+			Debug.Log("Good!");
+		}
 	}
 }
