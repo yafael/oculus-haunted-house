@@ -28,13 +28,12 @@ public class SimonController : MonoBehaviour {
 		// generate puzzle from list
 		puzzleKey = new List<string>();
 		currentPuzzleIndex = 0;
-		Random rnd = new Random();
 		for (int i = 0; i < puzzleLength; i++)
 		{
 			puzzleKey.Add(availableButtons[Random.Range(0, availableButtons.Count)].name);
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		// we don't want to register the command if analog stick isn't tilted enough
