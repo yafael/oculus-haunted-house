@@ -5,11 +5,13 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class SimonController : MonoBehaviour {
 
+	[SerializeField] private List<SimonButton> availableButtons;
 	private bool analogWasReset = true;
 
 	// Use this for initialization
 	void Start () {
-		
+		// generate puzzle from list
+
 	}
 	
 	// Update is called once per frame
