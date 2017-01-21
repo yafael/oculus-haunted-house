@@ -1,4 +1,4 @@
-// using System;
+using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
@@ -102,7 +102,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-                               m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+                               m_CharacterController.height/2f);
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
             m_MoveDir.x = desiredMove.x*speed;
@@ -125,29 +125,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
             }
-
-            if (PlayerWalking()) {
-              m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
-            }
+            m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
 
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
-
-            m_MouseLook.UpdateCursorLock();
         }
 
-        // Might need updating if we use the controller in the final product
-        private bool PlayerWalking()
-        {
-            if (Input.GetKey(KeyCode.W) ||
-            Input.GetKey(KeyCode.A) ||
-            Input.GetKey(KeyCode.S) ||
-            Input.GetKey(KeyCode.D)) {
-              return true;
-            } else {
-              return false;
-            }
-        }
 
         private void PlayJumpSound()
         {
@@ -199,23 +182,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 return;
             }
-
-            if (PlayerWalking()) {
-              if (m_CharacterController.velocity.magnitude > 0 && m_CharacterController.isGrounded)
-              {
-                  m_Camera.transform.localPosition =
-                      m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude +
-                                        (speed*(m_IsWalking ? 1f : m_RunstepLenghten)));
-                  newCameraPosition = m_Camera.transform.localPosition;
-                  newCameraPosition.y = m_Camera.transform.localPosition.y - m_JumpBob.Offset();
-              }
-              else
-              {
-                  newCameraPosition = m_Camera.transform.localPosition;
-                  newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
-              }
-              m_Camera.transform.localPosition = newCameraPosition;
+            if (m_CharacterController.velocity.magnitude > 0 && m_CharacterController.isGrounded)
+            {
+                m_Camera.transform.localPosition =
+                    m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude +
+                                      (speed*(m_IsWalking ? 1f : m_RunstepLenghten)));
+                newCameraPosition = m_Camera.transform.localPosition;
+                newCameraPosition.y = m_Camera.transform.localPosition.y - m_JumpBob.Offset();
             }
+            else
+            {
+                newCameraPosition = m_Camera.transform.localPosition;
+                newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
+            }
+            m_Camera.transform.localPosition = newCameraPosition;
         }
 
 
