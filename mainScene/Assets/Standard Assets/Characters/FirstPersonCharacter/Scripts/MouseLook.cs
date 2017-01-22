@@ -56,7 +56,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             UpdateCursorLock();
             */
 
-            character.localRotation = camera.localRotation;
+            //character.localRotation = camera.localRotation;
         }
 
         public void SetCursorLock(bool value)
