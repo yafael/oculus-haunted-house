@@ -124,14 +124,14 @@ public class CrawlerBehavior : MonoBehaviour {
             case EnemyState.EnemyStateApproach2:
                 if (!movedFor2)
                 {
-                    iTween.MoveTo(windowCrawler, new Vector3(windowCrawler.transform.position.x, 5.55f, windowCrawler.transform.position.z), 6.0f);
+                    iTween.MoveTo(windowCrawler, new Vector3(windowCrawler.transform.position.x, 5.55f, windowCrawler.transform.position.z), 10.0f);
                     movedFor2 = true;
                 }
                 break;
             case EnemyState.EnemyStateApproach3:
                 if (!movedFor3)
                 {
-                    iTween.MoveTo(windowCrawler, new Vector3(windowCrawler.transform.position.x, 1.55f, windowCrawler.transform.position.z), 4.0f);
+                    iTween.MoveTo(windowCrawler, new Vector3(windowCrawler.transform.position.x, 1.55f, windowCrawler.transform.position.z), 6.0f);
                     movedFor3 = true;
                 }
                 break;

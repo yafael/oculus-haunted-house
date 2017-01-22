@@ -18,7 +18,7 @@ public class DoorCollisionDetection : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.name.Equals("FPSController"))
+        if (other.gameObject.name.Equals("FPSController") && !doorOpen)
         {
             DisplayDoorHUD();
             canOpenDoor = true;
@@ -27,7 +27,7 @@ public class DoorCollisionDetection : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name.Equals("FPSController"))
+        if (other.gameObject.name.Equals("FPSController") && !doorOpen)
         {
             HideDoorHUD();
             canOpenDoor = false;
@@ -50,6 +50,7 @@ public class DoorCollisionDetection : MonoBehaviour {
         {
             iTween.RotateTo(exitDoor, new Vector3(0, -120, 0), 2.0f);
             doorOpen = true;
+            HideDoorHUD();
         }
 	}
 }
