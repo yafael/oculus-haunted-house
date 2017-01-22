@@ -84,6 +84,9 @@
     <Compile Include="Assets\CameraScript.cs" />
     <Compile Include="Assets\FlickeringLightScript.cs" />
     <Compile Include="Assets\NewBehaviourScript.cs" />
+    <Compile Include="Assets\RoomLayout\Room\Audio\SceneFader.cs" />
+    <Compile Include="Assets\Simon_Components\SimonButton.cs" />
+    <Compile Include="Assets\Simon_Components\SimonController.cs" />
     <Compile Include="Assets\True_Horror\True_Crawler\CrawlerBehavior.cs" />
     <Compile Include="Assets\True_Horror\True_Crawler\ExitCollision.cs" />
   </ItemGroup>

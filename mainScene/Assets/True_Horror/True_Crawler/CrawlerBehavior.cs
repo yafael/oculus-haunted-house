@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 
 
 [RequireComponent(typeof(AudioSource))]
@@ -8,7 +8,14 @@ public class CrawlerBehavior : MonoBehaviour {
     public AudioClip[] approach1Sounds;
     public AudioClip[] approach2Sounds;
     public AudioClip[] approach3Sounds;
+    public AudioClip[] backgroundSounds;
     public AudioClip killSound;
+
+    public FirstPersonController fpc;
+
+    public Text hudText;
+
+    public SceneFader sceneFader;
 
     public GameObject windowCrawler;
 
@@ -16,7 +23,7 @@ public class CrawlerBehavior : MonoBehaviour {
 
     EnemyState state = EnemyState.EnemyStateIdle;
 
-    float enemyTime = 120;
+    [SerializeField] float enemyTime = 75;
 
     Vector3 idealVector = new Vector3(-1.0f, 0.0f, 0.0f);
 
@@ -24,6 +31,8 @@ public class CrawlerBehavior : MonoBehaviour {
 
     float timeRemainingBeforeStateChange = 0;
     float nextSoundTime = 0;
+
+    float nextBgSoundTime = 0;
 
     public AudioSource audioC;
 
@@ -38,6 +47,18 @@ public class CrawlerBehavior : MonoBehaviour {
         enemyTime += (float)extra;
 
         timeRemainingBeforeStateChange = EnemyTimeForState(state);
+
+        audioC.PlayOneShot(backgroundSounds[3]);
+    }
+
+    public bool IsAboutToKill ()
+    {
+        return state == EnemyState.EnemyStatePreAttack;
+    }
+
+    public void RenderInactive()
+    {
+        this.state = EnemyState.EnemyStateInactive;
     }
 
     enum EnemyState {
@@ -47,14 +68,16 @@ public class CrawlerBehavior : MonoBehaviour {
         EnemyStateApproach3,
         EnemyStatePreAttack,
         EnemyStateLunging,
-        EnemyStateAttacking
+        EnemyStateAttacking,
+        EnemyStateInactive
     }
 
     
 
 	// Update is called once per frame
 	void Update () {
-        
+        PlayBGIfNecessary();
+
         if (state == EnemyState.EnemyStatePreAttack)
         {
             Vector3 worldDirection = cameraTransform.transform.TransformDirection(Vector3.forward);
@@ -99,7 +122,7 @@ public class CrawlerBehavior : MonoBehaviour {
                 if (state == EnemyState.EnemyStateApproach3)
                 {
                     System.Random rnd = new System.Random();
-                    int soundNumber = rnd.Next(0, approach3Sounds.Length - 1);
+                    int soundNumber = rnd.Next(0, approach3Sounds.Length);
                     audioC.PlayOneShot(approach3Sounds[soundNumber]);
                 }
 
@@ -107,6 +130,26 @@ public class CrawlerBehavior : MonoBehaviour {
         }
 
 	}
+
+    void PlayBGIfNecessary()
+    {
+        nextBgSoundTime -= Time.deltaTime;
+
+        if (nextBgSoundTime <= 0)
+        {
+            PlayBGSound();
+            nextBgSoundTime = 15.0f;
+        }
+    }
+
+    void PlayBGSound()
+    {
+        System.Random rnd = new System.Random();
+
+        int soundNumber = rnd.Next(0, backgroundSounds.Length);
+
+        audioC.PlayOneShot(backgroundSounds[soundNumber]);
+    }
 
     bool movedFor2 = false;
     bool movedFor3 = false;
@@ -195,11 +238,11 @@ public class CrawlerBehavior : MonoBehaviour {
             case EnemyState.EnemyStateIdle:
                 break;
             case EnemyState.EnemyStateApproach1:
-                soundNumber = rnd.Next(0,approach1Sounds.Length - 1);
+                soundNumber = rnd.Next(0,approach1Sounds.Length);
                 audioC.PlayOneShot(approach1Sounds[soundNumber]);
                 break;
             case EnemyState.EnemyStateApproach2:
-                soundNumber = rnd.Next(0, approach2Sounds.Length - 1);
+                soundNumber = rnd.Next(0, approach2Sounds.Length);
                 audioC.PlayOneShot(approach2Sounds[soundNumber]);
                 break;
             case EnemyState.EnemyStateApproach3:
@@ -240,7 +283,7 @@ public class CrawlerBehavior : MonoBehaviour {
 
         Vector3 camPosition = cameraTransform.transform.position;
 
-        gameObject.transform.position = new Vector3(camPosition.x + scale * worldDirection.x, 6.50f + worldDirection.y, camPosition.z + scale * worldDirection.z);
+        gameObject.transform.position = new Vector3(camPosition.x + scale * worldDirection.x, 6.50f + scale * worldDirection.y, camPosition.z + scale * worldDirection.z);
 
         yDrop = 0.0f;
     }
@@ -253,9 +296,11 @@ public class CrawlerBehavior : MonoBehaviour {
 
         yDrop += Time.deltaTime * 15.0f;
 
-        if (yDrop > 3.86f)
+        if (yDrop > 5.40f)
         {
             state = EnemyState.EnemyStateAttacking;
+            hudText.text = "Game Over.";
+            fpc.m_WalkSpeed = 0;
         }
     }
 

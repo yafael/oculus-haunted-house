@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class DoorCollisionDetection : MonoBehaviour {
+    public static bool hasCompletedChallenge = false;
 
     public Text hudText;
     public GameObject exitDoor;
@@ -36,7 +35,7 @@ public class DoorCollisionDetection : MonoBehaviour {
 
     void DisplayDoorHUD()
     {
-        hudText.text = "Press A to open the door";
+        hudText.text = hasCompletedChallenge ? "Press A to open the door" : "You must complete the challenge at the chest before leaving";
     }
 
     void HideDoorHUD()
@@ -46,7 +45,7 @@ public class DoorCollisionDetection : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (CrossPlatformInputManager.GetButtonDown("Fire1") && canOpenDoor && !doorOpen)
+        if (CrossPlatformInputManager.GetButtonDown("Fire1") && canOpenDoor && !doorOpen && hasCompletedChallenge)
         {
             iTween.RotateTo(exitDoor, new Vector3(0, -120, 0), 2.0f);
             doorOpen = true;
