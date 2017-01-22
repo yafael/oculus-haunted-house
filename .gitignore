@@ -39,3 +39,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Operating Systems Files
+*.DS_Store
+[Tt]humbs.db
