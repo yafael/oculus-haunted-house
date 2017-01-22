@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class DoorCollisionDetection : MonoBehaviour {
 
     public Text hudText;
     public GameObject exitDoor;
+
+    bool canOpenDoor = false;
+    bool doorOpen = false;
 
     // Use this for initialization
     void Start() {
@@ -17,6 +21,7 @@ public class DoorCollisionDetection : MonoBehaviour {
         if (other.gameObject.name.Equals("FPSController"))
         {
             DisplayDoorHUD();
+            canOpenDoor = true;
         }
     }
 
@@ -25,6 +30,7 @@ public class DoorCollisionDetection : MonoBehaviour {
         if (other.gameObject.name.Equals("FPSController"))
         {
             HideDoorHUD();
+            canOpenDoor = false;
         }
     }
 
@@ -40,6 +46,10 @@ public class DoorCollisionDetection : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
+        if (CrossPlatformInputManager.GetButtonDown("Fire1") && canOpenDoor && !doorOpen)
+        {
+            iTween.RotateTo(exitDoor, new Vector3(0, -120, 0), 2.0f);
+            doorOpen = true;
+        }
 	}
 }

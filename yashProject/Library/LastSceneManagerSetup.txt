@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/RoomLayout/Demo scene.unity
+- path: C:/Users/mlh-admin/Documents/Boilermake/oculus-haunted-house/mainScene/Assets/HorrorGame.unity
   isLoaded: 1
   isActive: 1
